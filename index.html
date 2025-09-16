@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celebrating Darasimi ✨</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --pink-light: #fce4ec;
+            --pink-soft: #f8bbd9;
+            --pink-medium: #e91e63;
+            --pink-deep: #ad1457;
+            --pink-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            --pink-glow: rgba(233, 30, 99, 0.3);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--pink-gradient);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Floating hearts animation */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            color: var(--pink-medium);
+            animation: float 6s infinite ease-in-out;
+            opacity: 0.7;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(233, 30, 99, 0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--pink-deep);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        nav a:hover, nav a.active {
+            background: var(--pink-gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--pink-glow);
+        }
+        
+        /* Page sections */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 100px 2rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Home Page */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: var(--pink-deep);
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .celebration-text {
+            font-size: 1.5rem;
+            color: var(--pink-medium);
+            margin-bottom: 2rem;
+            animation: pulse 3s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        
+        .celebration-emojis {
+            font-size: 3rem;
+            margin: 2rem 0;
+            animation: rotate 4s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Gallery Page */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.2);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .gallery-image:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(233, 30, 99, 0.3);
+        }
+        
+        /* Gallery Image Container */
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+        
+        /* Happy Birthday Overlay */
+        .birthday-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(233, 30, 99, 0.9), rgba(255, 154, 158, 0.9));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s ease;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .gallery-item:hover .birthday-overlay {
+            opacity: 1;
+        }
+        
+        .birthday-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: birthday-pulse 1.5s ease-in-out infinite;
+            padding: 1rem;
+        }
+        
+        @keyframes birthday-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Click effect */
+        .gallery-item.clicked .birthday-overlay {
+            opacity: 1;
+            background: linear-gradient(45deg, rgba(255, 107, 107, 0.95), rgba(255, 154, 158, 0.95));
+        }
+        
+        .gallery-item.clicked .birthday-text {
+            animation: birthday-celebration 2s ease-out;
+            font-size: 2rem;
+        }
+        
+        @keyframes birthday-celebration {
+            0% { transform: scale(0.5) rotate(-180deg); opacity: 0; }
+            50% { transform: scale(1.2) rotate(0deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        
+        /* Birthday hearts that appear on click */
+        .birthday-heart {
+            position: absolute;
+            color: white;
+            font-size: 1.5rem;
+            pointer-events: none;
+            animation: heart-float 2s ease-out forwards;
+        }
+        
+        @keyframes heart-float {
+            0% { 
+                opacity: 1; 
+                transform: translateY(0) scale(0.5); 
+            }
+            100% { 
+                opacity: 0; 
+                transform: translateY(-100px) scale(1.2); 
+            }
+        }
+        
+        /* Memories Page */
+        .quotes-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .quote-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3rem;
+            margin: 2rem 0;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(233, 30, 99, 0.15);
+            position: relative;
+            animation: slideInUp 1s ease;
+        }
+        
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .quote-card::before {
+            content: '💖';
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            font-size: 2rem;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+        
+        .quote-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: var(--pink-deep);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .quote-author {
+            text-align: right;
+            color: var(--pink-medium);
+            font-weight: 500;
+        }
+        
+        /* About Page */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .about-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 4rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(233, 30, 99, 0.2);
+            margin: 2rem 0;
+        }
+        
+        .sparkle {
+            display: inline-block;
+            animation: sparkle 2s infinite;
+        }
+        
+        /* Birthday Countdown Styles */
+        .countdown-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(233, 30, 99, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .countdown-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--pink-deep);
+            margin-bottom: 2rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px var(--pink-glow); }
+            to { text-shadow: 0 0 20px var(--pink-glow), 0 0 30px var(--pink-glow); }
+        }
+        
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .time-unit {
+            text-align: center;
+            background: var(--pink-gradient);
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(233, 30, 99, 0.3);
+            min-width: 80px;
+            animation: pulse-gentle 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-gentle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .time-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .time-label {
+            display: block;
+            font-size: 0.9rem;
+            color: white;
+            font-weight: 500;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .countdown-message {
+            font-size: 1.3rem;
+            color: var(--pink-medium);
+            font-weight: 500;
+            animation: bounce-gentle 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        /* Birthday Celebration Styles */
+        .birthday-celebration {
+            margin: 3rem 0;
+            padding: 3rem;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffa8a8, #ffcccc);
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(255, 107, 107, 0.4);
+            animation: celebration-entrance 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes celebration-entrance {
+            0% { 
+                opacity: 0; 
+                transform: scale(0.5) rotate(-180deg); 
+            }
+            50% { 
+                transform: scale(1.1) rotate(0deg); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1) rotate(0deg); 
+            }
+        }
+        
+        .birthday-celebration::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: shine 3s linear infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .birthday-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 1rem;
+            animation: birthday-bounce 1s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+        
+        @keyframes birthday-bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            25% { transform: translateY(-10px) scale(1.05); }
+            75% { transform: translateY(-5px) scale(1.02); }
+        }
+        
+        .birthday-message {
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .birthday-emojis {
+            font-size: 3rem;
+            animation: emoji-dance 2s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+        
+        @keyframes emoji-dance {
+            0%, 100% { transform: rotate(-5deg) scale(1); }
+            25% { transform: rotate(5deg) scale(1.1); }
+            50% { transform: rotate(-3deg) scale(0.95); }
+            75% { transform: rotate(3deg) scale(1.05); }
+        }
+        
+        /* Confetti Animation */
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1001;
+        }
+        
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confetti-fall 3s linear infinite;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Page titles */
+        .page-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: var(--pink-deep);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--pink-gradient);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .celebration-text { font-size: 1.2rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            nav ul { flex-direction: column; gap: 1rem; }
+            nav { padding: 1rem; }
+            .page { padding: 150px 1rem 2rem; }
+            
+            .countdown-timer {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .time-unit {
+                min-width: 60px;
+                padding: 1rem;
+            }
+            
+            .time-number {
+                font-size: 2rem;
+            }
+            
+            .countdown-title {
+                font-size: 2rem;
+            }
+            
+            .birthday-title {
+                font-size: 2.5rem;
+            }
+            
+            .birthday-message {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts background -->
+    <div class="floating-hearts" id="heartsContainer"></div>
+    
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showPage('home')" class="nav-link active">Home 🏠</a></li>
+            <li><a href="#" onclick="showPage('gallery')" class="nav-link">Gallery 📸</a></li>
+            <li><a href="#" onclick="showPage('memories')" class="nav-link">Memories 💭</a></li>
+            <li><a href="#" onclick="showPage('about')" class="nav-link">About 💖</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <div class="hero">
+            <h1>✨ Celebrating Darasimi ✨</h1>
+            
+            <!-- Birthday Countdown -->
+            <div id="countdownSection" class="countdown-section">
+                <div class="countdown-title">🎂 Birthday Countdown 🎂</div>
+                <div class="countdown-timer" id="countdownTimer">
+                    <div class="time-unit">
+                        <span class="time-number" id="days">00</span>
+                        <span class="time-label">Days</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="time-number" id="hours">00</span>
+                        <span class="time-label">Hours</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="time-number" id="minutes">00</span>
+                        <span class="time-label">Minutes</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="time-number" id="seconds">00</span>
+                        <span class="time-label">Seconds</span>
+                    </div>
+                </div>
+                <div class="countdown-message" id="countdownMessage">Until Darasimi's Special Day! 🌟</div>
+            </div>
+            
+            <!-- Birthday Celebration (Hidden initially) -->
+            <div id="birthdayCelebration" class="birthday-celebration" style="display: none;">
+                <div class="birthday-title">🎉 HAPPY BIRTHDAY DARASIMI! 🎉</div>
+                <div class="birthday-message">Today is your special day! 🎂✨</div>
+                <div class="birthday-emojis">🎊 🎈 🎁 🌟 💖 🎂 🎉 🎈</div>
+            </div>
+            
+            <div class="celebration-text">
+                A special celebration for an amazing sister! 💕
+            </div>
+            <div class="celebration-emojis">
+                🎉 🌸 🎊 🌟 💖
+            </div>
+            <p style="font-size: 1.2rem; color: var(--pink-deep); margin-top: 2rem;">
+                Welcome to a beautiful tribute created with love<br>
+                <strong>From your loving sister, Elizabeth 💕</strong>
+            </p>
+        </div>
+    </div>
+    
+    <!-- Gallery Page -->
+    <div id="gallery" class="page">
+        <h2 class="page-title">Beautiful Moments 📸</h2>
+        <div class="gallery-container">
+            <div class="gallery-grid">
+                <!-- Darasimi's beautiful photos -->
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi01.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 🎉</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi02.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 🎂</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi03.png" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 🎈</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi04.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 🌟</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi05.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 💖</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi06.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 🎊</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi07.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! ✨</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi08.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 🎁</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi09.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 🌸</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi10.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 🦋</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi11.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 🌈</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi12.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 💕</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi13.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 🎵</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi14.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 👑</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi15.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 🌺</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi16.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 🎀</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi17.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 💫</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi18.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 🕊️</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi19.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 🌙</div>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="celebratePhoto(this)">
+                    <img src="images/darasimi20.jpeg" alt="Darasimi's beautiful moment" class="gallery-image">
+                    <div class="birthday-overlay">
+                        <div class="birthday-text">Happy Birthday<br>Darasimi! 🎂✨</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Memories Page -->
+    <div id="memories" class="page">
+        <h2 class="page-title">Special Memories & Quotes 💭</h2>
+        <div class="quotes-container">
+            <div class="quote-card">
+                <div class="quote-text">
+                    "Darasimi Baby" 🌸
+                </div>
+                <div class="quote-author">- Elizabeth</div>
+            </div>
+            
+            <div class="quote-card">
+                <div class="quote-text">
+                    "Having a sister like Darasimi makes life so much brighter and more colorful" 🌈
+                </div>
+                <div class="quote-author">- Elizabeth</div>
+            </div>
+            
+            <div class="quote-card">
+                <div class="quote-text">
+                    "A sister is both your mirror and your opposite - and Darasimi is the perfect reflection of beauty and grace" ✨
+                </div>
+                <div class="quote-author">- Elizabeth</div>
+            </div>
+            
+            <div class="quote-card">
+                <div class="quote-text">
+                    "Every day with you is a celebration, dear sister! Here's to many more beautiful moments together" 🎉
+                </div>
+                <div class="quote-author">- Elizabeth</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- About Page -->
+    <div id="about" class="page">
+        <h2 class="page-title">About This Beautiful Sister 💖</h2>
+        <div class="about-content">
+            <div class="about-card">
+                <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: var(--pink-deep); margin-bottom: 2rem;">
+                    <span class="sparkle">✨</span> Darasimi <span class="sparkle">✨</span>
+                </h3>
+                <p style="font-size: 1.3rem; color: var(--pink-medium); line-height: 1.8; margin-bottom: 2rem;">
+                    This beautiful website is a celebration of an amazing sister, created with so much love and care. 
+                    Darasimi brings joy, laughter, and endless beautiful moments to everyone around her.
+                </p>
+                <p style="font-size: 1.1rem; color: var(--pink-deep); margin-bottom: 2rem;">
+                    Every photo, every memory, and every moment shared here tells the story of a wonderful person 
+                    who deserves to be celebrated every single day! 🌟
+                </p>
+                <div style="font-size: 2rem; margin: 2rem 0;">
+                    💕 🎊 🌸 🎉 💖 🌟 ✨ 🎈
+                </div>
+                <p style="font-style: italic; color: var(--pink-medium);">
+                    "Made with infinite love by your sister Elizabeth 💕"
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation functionality
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active nav link
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        
+        // Floating hearts animation
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+            
+            document.getElementById('heartsContainer').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        
+        // Birthday countdown and celebration
+        const birthdayDate = new Date('2025-09-17T00:00:00').getTime();
+        let celebrationTriggered = false;
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = birthdayDate - now;
+            
+            if (distance > 0) {
+                // Calculate time units
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                // Update display
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                // It's birthday time!
+                if (!celebrationTriggered) {
+                    triggerBirthdaycelebration();
+                    celebrationTriggered = true;
+                }
+            }
+        }
+        
+        function triggerBirthdaycelebration() {
+            // Hide countdown
+            document.getElementById('countdownSection').style.display = 'none';
+            
+            // Show birthday celebration
+            const celebration = document.getElementById('birthdayCelebration');
+            celebration.style.display = 'block';
+            
+            // Create confetti
+            createConfetti();
+            
+            // Play birthday sound effect (if you want to add audio)
+            // You can add an audio element and play it here
+            
+            // Update page title
+            document.title = "🎉 HAPPY BIRTHDAY DARASIMI! 🎉";
+            
+            // Create extra floating hearts for birthday
+            for(let i = 0; i < 20; i++) {
+                setTimeout(() => createBirthdayHeart(), i * 200);
+            }
+        }
+        
+        function createConfetti() {
+            const confettiContainer = document.createElement('div');
+            confettiContainer.className = 'confetti';
+            document.body.appendChild(confettiContainer);
+            
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff'];
+            
+            for(let i = 0; i < 150; i++) {
+                setTimeout(() => {
+                    const confettiPiece = document.createElement('div');
+                    confettiPiece.className = 'confetti-piece';
+                    confettiPiece.style.left = Math.random() * 100 + '%';
+                    confettiPiece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confettiPiece.style.animationDelay = Math.random() * 3 + 's';
+                    confettiPiece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    
+                    confettiContainer.appendChild(confettiPiece);
+                    
+                    setTimeout(() => {
+                        confettiPiece.remove();
+                    }, 5000);
+                }, i * 50);
+            }
+            
+            // Remove confetti container after animation
+            setTimeout(() => {
+                confettiContainer.remove();
+            }, 10000);
+        }
+        
+        function createBirthdayHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = ['💖', '🎂', '🎉', '🎈', '🌟'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            heart.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+            heart.style.color = '#ff6b6b';
+            
+            document.getElementById('heartsContainer').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+        
+        // Photo celebration function
+        function celebratePhoto(element) {
+            // Add clicked class for special animation
+            element.classList.add('clicked');
+            
+            // Create floating hearts
+            createPhotoHearts(element);
+            
+            // Remove clicked class after animation
+            setTimeout(() => {
+                element.classList.remove('clicked');
+            }, 2000);
+        }
+        
+        function createPhotoHearts(element) {
+            const hearts = ['💖', '🎂', '🎉', '🎈', '✨', '🌟', '💕'];
+            
+            for(let i = 0; i < 6; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'birthday-heart';
+                    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * 80 + 10 + '%';
+                    heart.style.top = Math.random() * 80 + 10 + '%';
+                    
+                    element.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 2000);
+                }, i * 200);
+            }
+        }
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+        
+        // Add some extra sparkle on load
+        window.addEventListener('load', () => {
+            // Create initial hearts
+            for(let i = 0; i < 5; i++) {
+                setTimeout(createHeart, i * 1000);
+            }
+        });
+    </script>
+</body>
+</html>
