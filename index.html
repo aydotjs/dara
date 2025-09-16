@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Celebrating Darasimi ✨</title>
+    <title>Celebrating Esther ✨</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap");
 
@@ -32,6 +32,84 @@
         background: var(--pink-gradient);
         min-height: 100vh;
         overflow-x: hidden;
+      }
+
+      /* Music Control Button */
+      .music-control {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: var(--pink-gradient);
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+        cursor: pointer;
+        z-index: 1002;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+        transition: all 0.3s ease;
+        animation: music-pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes music-pulse {
+        0%, 100% {
+          transform: scale(1);
+          box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+        }
+        50% {
+          transform: scale(1.1);
+          box-shadow: 0 12px 30px rgba(233, 30, 99, 0.6);
+        }
+      }
+
+      .music-control:hover {
+        transform: scale(1.1);
+        box-shadow: 0 12px 30px rgba(233, 30, 99, 0.6);
+      }
+
+      .music-control.paused {
+        animation: none;
+        opacity: 0.7;
+      }
+
+      /* Music visualization bars */
+      .music-bars {
+        display: flex;
+        gap: 2px;
+        align-items: end;
+        height: 20px;
+      }
+
+      .music-bar {
+        width: 3px;
+        background: white;
+        border-radius: 2px;
+        animation: music-bar 1s ease-in-out infinite;
+      }
+
+      .music-bar:nth-child(1) { height: 60%; animation-delay: 0s; }
+      .music-bar:nth-child(2) { height: 100%; animation-delay: 0.1s; }
+      .music-bar:nth-child(3) { height: 80%; animation-delay: 0.2s; }
+      .music-bar:nth-child(4) { height: 40%; animation-delay: 0.3s; }
+      .music-bar:nth-child(5) { height: 70%; animation-delay: 0.4s; }
+
+      @keyframes music-bar {
+        0%, 100% {
+          transform: scaleY(0.3);
+        }
+        50% {
+          transform: scaleY(1);
+        }
+      }
+
+      .music-control.paused .music-bar {
+        animation-play-state: paused;
+        transform: scaleY(0.3);
       }
 
       /* Floating hearts animation */
@@ -728,6 +806,14 @@
           padding: 2rem 1.5rem;
           margin: 1.5rem auto;
         }
+
+        .music-control {
+          width: 50px;
+          height: 50px;
+          font-size: 1.2rem;
+          bottom: 15px;
+          right: 15px;
+        }
       }
 
       /* Tablet Optimization */
@@ -809,6 +895,24 @@
     </style>
   </head>
   <body>
+    <!-- Background Music -->
+    <audio id="backgroundMusic" loop preload="auto">
+      <source src="audio/happy-birthday-simi.mp3" type="audio/mpeg">
+      <source src="audio/happy-birthday-simi.ogg" type="audio/ogg">
+      Your browser does not support the audio element.
+    </audio>
+
+    <!-- Music Control Button -->
+    <button id="musicControl" class="music-control" onclick="toggleMusic()">
+      <div class="music-bars">
+        <div class="music-bar"></div>
+        <div class="music-bar"></div>
+        <div class="music-bar"></div>
+        <div class="music-bar"></div>
+        <div class="music-bar"></div>
+      </div>
+    </button>
+
     <!-- Floating hearts background -->
     <div class="floating-hearts" id="heartsContainer"></div>
 
@@ -839,7 +943,7 @@
     <!-- Home Page -->
     <div id="home" class="page active">
       <div class="hero">
-        <h1>✨ Celebrating Darasimi ✨</h1>
+        <h1>✨ Celebrating Esther ✨</h1>
 
         <!-- Birthday Countdown -->
         <div id="countdownSection" class="countdown-section">
@@ -863,7 +967,7 @@
             </div>
           </div>
           <div class="countdown-message" id="countdownMessage">
-            Until Darasimi's Special Day! 🌟
+            Until Esther's Special Day! 🌟
           </div>
         </div>
 
@@ -873,7 +977,7 @@
           class="birthday-celebration"
           style="display: none"
         >
-          <div class="birthday-title">🎉 HAPPY BIRTHDAY DARASIMI! 🎉</div>
+          <div class="birthday-title">🎉 HAPPY BIRTHDAY Esther! 🎉</div>
           <div class="birthday-message">Today is your special day! 🎂✨</div>
           <div class="birthday-emojis">🎊 🎈 🎁 🌟 💖 🎂 🎉 🎈</div>
         </div>
@@ -901,125 +1005,125 @@
       <h2 class="page-title">Beautiful Moments 📸</h2>
       <div class="gallery-container">
         <div class="gallery-grid">
-          <!-- Darasimi's beautiful photos -->
+          <!-- Esther's beautiful photos -->
           <div class="gallery-item" onclick="celebratePhoto(this)">
             <img
-              src="images/darasimi01.jpeg"
-              alt="Darasimi's beautiful moment"
+              src="images/Esther01.jpeg"
+              alt="Esther's beautiful moment"
               class="gallery-image"
             />
             <div class="birthday-overlay">
-              <div class="birthday-text">Happy Birthday<br />Darasimi! 🎉</div>
+              <div class="birthday-text">Happy Birthday<br />Esther! 🎉</div>
             </div>
           </div>
           <div class="gallery-item" onclick="celebratePhoto(this)">
             <img
-              src="images/darasimi02.jpeg"
-              alt="Darasimi's beautiful moment"
+              src="images/Esther02.jpeg"
+              alt="Esther's beautiful moment"
               class="gallery-image"
             />
             <div class="birthday-overlay">
-              <div class="birthday-text">Happy Birthday<br />Darasimi! 🎂</div>
+              <div class="birthday-text">Happy Birthday<br />Esther! 🎂</div>
             </div>
           </div>
           <div class="gallery-item" onclick="celebratePhoto(this)">
             <img
-              src="images/darasimi03.png"
-              alt="Darasimi's beautiful moment"
+              src="images/Esther03.png"
+              alt="Esther's beautiful moment"
               class="gallery-image"
             />
             <div class="birthday-overlay">
-              <div class="birthday-text">Happy Birthday<br />Darasimi! 🎈</div>
+              <div class="birthday-text">Happy Birthday<br />Esther! 🎈</div>
             </div>
           </div>
           <div class="gallery-item" onclick="celebratePhoto(this)">
             <img
-              src="images/darasimi04.jpeg"
-              alt="Darasimi's beautiful moment"
+              src="images/Esther04.jpeg"
+              alt="Esther's beautiful moment"
               class="gallery-image"
             />
             <div class="birthday-overlay">
-              <div class="birthday-text">Happy Birthday<br />Darasimi! 🌟</div>
+              <div class="birthday-text">Happy Birthday<br />Esther! 🌟</div>
             </div>
           </div>
           <div class="gallery-item" onclick="celebratePhoto(this)">
             <img
-              src="images/darasimi05.jpeg"
-              alt="Darasimi's beautiful moment"
+              src="images/Esther05.jpeg"
+              alt="Esther's beautiful moment"
               class="gallery-image"
             />
             <div class="birthday-overlay">
-              <div class="birthday-text">Happy Birthday<br />Darasimi! 💖</div>
+              <div class="birthday-text">Happy Birthday<br />Esther! 💖</div>
             </div>
           </div>
           <div class="gallery-item" onclick="celebratePhoto(this)">
             <img
-              src="images/darasimi06.jpeg"
-              alt="Darasimi's beautiful moment"
+              src="images/Esther06.jpeg"
+              alt="Esther's beautiful moment"
               class="gallery-image"
             />
             <div class="birthday-overlay">
-              <div class="birthday-text">Happy Birthday<br />Darasimi! 🎊</div>
+              <div class="birthday-text">Happy Birthday<br />Esther! 🎊</div>
             </div>
           </div>
           <div class="gallery-item" onclick="celebratePhoto(this)">
             <img
-              src="images/darasimi07.jpeg"
-              alt="Darasimi's beautiful moment"
+              src="images/Esther07.jpeg"
+              alt="Esther's beautiful moment"
               class="gallery-image"
             />
             <div class="birthday-overlay">
-              <div class="birthday-text">Happy Birthday<br />Darasimi! ✨</div>
+              <div class="birthday-text">Happy Birthday<br />Esther! ✨</div>
             </div>
           </div>
           <div class="gallery-item" onclick="celebratePhoto(this)">
             <img
-              src="images/darasimi08.jpeg"
-              alt="Darasimi's beautiful moment"
+              src="images/Esther08.jpeg"
+              alt="Esther's beautiful moment"
               class="gallery-image"
             />
             <div class="birthday-overlay">
-              <div class="birthday-text">Happy Birthday<br />Darasimi! 🎁</div>
+              <div class="birthday-text">Happy Birthday<br />Esther! 🎁</div>
             </div>
           </div>
           <div class="gallery-item" onclick="celebratePhoto(this)">
             <img
-              src="images/darasimi09.jpeg"
-              alt="Darasimi's beautiful moment"
+              src="images/Esther09.jpeg"
+              alt="Esther's beautiful moment"
               class="gallery-image"
             />
             <div class="birthday-overlay">
-              <div class="birthday-text">Happy Birthday<br />Darasimi! 🌸</div>
+              <div class="birthday-text">Happy Birthday<br />Esther! 🌸</div>
             </div>
           </div>
           <div class="gallery-item" onclick="celebratePhoto(this)">
             <img
-              src="images/darasimi10.jpeg"
-              alt="Darasimi's beautiful moment"
+              src="images/Esther10.jpeg"
+              alt="Esther's beautiful moment"
               class="gallery-image"
             />
             <div class="birthday-overlay">
-              <div class="birthday-text">Happy Birthday<br />Darasimi! 🦋</div>
+              <div class="birthday-text">Happy Birthday<br />Esther! 🦋</div>
             </div>
           </div>
           <div class="gallery-item" onclick="celebratePhoto(this)">
             <img
-              src="images/darasimi11.jpeg"
-              alt="Darasimi's beautiful moment"
+              src="images/Esther11.jpeg"
+              alt="Esther's beautiful moment"
               class="gallery-image"
             />
             <div class="birthday-overlay">
-              <div class="birthday-text">Happy Birthday<br />Darasimi! 🌈</div>
+              <div class="birthday-text">Happy Birthday<br />Esther! 🌈</div>
             </div>
           </div>
           <div class="gallery-item" onclick="celebratePhoto(this)">
             <img
-              src="images/darasimi12.jpeg"
-              alt="Darasimi's beautiful moment"
+              src="images/Esther12.jpeg"
+              alt="Esther's beautiful moment"
               class="gallery-image"
             />
             <div class="birthday-overlay">
-              <div class="birthday-text">Happy Birthday<br />Darasimi! 💕</div>
+              <div class="birthday-text">Happy Birthday<br />Esther! 💕</div>
             </div>
           </div>
         </div>
@@ -1031,13 +1135,13 @@
       <h2 class="page-title">Special Memories & Quotes 💭</h2>
       <div class="quotes-container">
         <div class="quote-card">
-          <div class="quote-text">"Darasimi Baby" 🌸</div>
+          <div class="quote-text">"Esther Baby" 🌸</div>
           <div class="quote-author">- Elizabeth</div>
         </div>
 
         <div class="quote-card">
           <div class="quote-text">
-            "Having a sister like Darasimi makes life so much brighter and more
+            "Having a sister like Esther makes life so much brighter and more
             colorful" 🌈
           </div>
           <div class="quote-author">- Elizabeth</div>
@@ -1045,7 +1149,7 @@
 
         <div class="quote-card">
           <div class="quote-text">
-            "A sister is both your mirror and your opposite - and Darasimi is
+            "A sister is both your mirror and your opposite - and Esther is
             the perfect reflection of beauty and grace" ✨
           </div>
           <div class="quote-author">- Elizabeth</div>
@@ -1075,7 +1179,7 @@
               line-height: 1.2;
             "
           >
-            <span class="sparkle">✨</span> Darasimi
+            <span class="sparkle">✨</span> Esther
             <span class="sparkle">✨</span>
           </h3>
           <p
@@ -1087,7 +1191,7 @@
             "
           >
             This beautiful website is a celebration of an amazing sister,
-            created with so much love and care. Darasimi brings joy, laughter,
+            created with so much love and care. Esther brings joy, laughter,
             and endless beautiful moments to everyone around her.
           </p>
           <p
@@ -1119,6 +1223,60 @@
     </div>
 
     <script>
+      // Music functionality
+      let isPlaying = false;
+      const music = document.getElementById('backgroundMusic');
+      const musicControl = document.getElementById('musicControl');
+
+      // Initialize music
+      function initializeMusic() {
+        // Try to start music automatically (modern browsers may block this)
+        music.volume = 0.5; // Set volume to 50%
+        
+        // Attempt autoplay
+        const playPromise = music.play();
+        
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            // Autoplay successful
+            isPlaying = true;
+            updateMusicButton();
+          }).catch(error => {
+            // Autoplay prevented by browser
+            console.log("Autoplay prevented, user interaction required");
+            isPlaying = false;
+            updateMusicButton();
+          });
+        }
+      }
+
+      function toggleMusic() {
+        if (isPlaying) {
+          music.pause();
+          isPlaying = false;
+        } else {
+          const playPromise = music.play();
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              isPlaying = true;
+            }).catch(error => {
+              console.log("Error playing music:", error);
+            });
+          }
+        }
+        updateMusicButton();
+      }
+
+      function updateMusicButton() {
+        if (isPlaying) {
+          musicControl.classList.remove('paused');
+          musicControl.title = "Pause Music 🎵";
+        } else {
+          musicControl.classList.add('paused');
+          musicControl.title = "Play Music 🎵";
+        }
+      }
+
       // Navigation functionality
       function showPage(pageId) {
         // Hide all pages
@@ -1206,7 +1364,7 @@
         // You can add an audio element and play it here
 
         // Update page title
-        document.title = "🎉 HAPPY BIRTHDAY DARASIMI! 🎉";
+        document.title = "🎉 HAPPY BIRTHDAY Esther! 🎉";
 
         // Create extra floating hearts for birthday
         for (let i = 0; i < 20; i++) {
@@ -1305,17 +1463,36 @@
         }
       }
 
-      // Update countdown every second
-      setInterval(updateCountdown, 1000);
-      updateCountdown(); // Initial call
-
-      // Add some extra sparkle on load
-      window.addEventListener("load", () => {
+      // Initialize everything when page loads
+      window.addEventListener('load', () => {
+        // Initialize music
+        initializeMusic();
+        
         // Create initial hearts
         for (let i = 0; i < 5; i++) {
           setTimeout(createHeart, i * 1000);
         }
       });
+
+      // Allow user to start music on first interaction
+      document.addEventListener('click', () => {
+        if (!isPlaying && music.paused) {
+          // This will help with browsers that require user interaction
+          const playPromise = music.play();
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              isPlaying = true;
+              updateMusicButton();
+            }).catch(error => {
+              // Still blocked or error occurred
+            });
+          }
+        }
+      }, { once: true });
+
+      // Update countdown every second
+      setInterval(updateCountdown, 1000);
+      updateCountdown(); // Initial call
 
       // Performance optimization: Reduce hearts on mobile
       function isMobile() {
