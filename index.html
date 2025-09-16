@@ -54,33 +54,44 @@
             100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
         }
         
-        /* Navigation */
+        /* Navigation - Mobile First */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
+            padding: 0.8rem 1rem;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(233, 30, 99, 0.1);
+            box-shadow: 0 2px 15px rgba(233, 30, 99, 0.1);
         }
         
         nav ul {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             list-style: none;
-            gap: 2rem;
+            gap: 0.5rem;
+            max-width: 100%;
+            overflow-x: auto;
+            padding: 0.2rem 0;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        nav ul::-webkit-scrollbar {
+            display: none;
         }
         
         nav a {
             text-decoration: none;
             color: var(--pink-deep);
             font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
+            padding: 0.5rem 0.8rem;
+            border-radius: 20px;
             transition: all 0.3s ease;
             cursor: pointer;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            min-width: fit-content;
         }
         
         nav a:hover, nav a.active {
@@ -94,7 +105,7 @@
         .page {
             display: none;
             min-height: 100vh;
-            padding: 100px 2rem 2rem;
+            padding: 80px 1rem 2rem;
             position: relative;
             z-index: 10;
         }
@@ -112,15 +123,17 @@
         /* Home Page */
         .hero {
             text-align: center;
-            padding: 4rem 0;
+            padding: 2rem 0;
+            max-width: 100%;
         }
         
         .hero h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 4rem;
+            font-size: clamp(2.5rem, 8vw, 4rem);
             color: var(--pink-deep);
             margin-bottom: 1rem;
             animation: bounce 2s infinite;
+            line-height: 1.2;
         }
         
         @keyframes bounce {
@@ -130,10 +143,12 @@
         }
         
         .celebration-text {
-            font-size: 1.5rem;
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
             color: var(--pink-medium);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             animation: pulse 3s infinite;
+            line-height: 1.4;
+            padding: 0 1rem;
         }
         
         @keyframes pulse {
@@ -142,8 +157,8 @@
         }
         
         .celebration-emojis {
-            font-size: 3rem;
-            margin: 2rem 0;
+            font-size: clamp(2rem, 6vw, 3rem);
+            margin: 1.5rem 0;
             animation: rotate 4s linear infinite;
         }
         
@@ -156,13 +171,14 @@
         .gallery-container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 1rem;
         }
         
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem 0;
         }
         
         .gallery-image {
@@ -170,16 +186,16 @@
             height: 100%;
             aspect-ratio: 1;
             object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.2);
             transition: all 0.4s ease;
             cursor: pointer;
             position: relative;
         }
         
         .gallery-image:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(233, 30, 99, 0.3);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(233, 30, 99, 0.3);
         }
         
         /* Gallery Image Container */
@@ -187,7 +203,7 @@
             position: relative;
             aspect-ratio: 1;
             overflow: hidden;
-            border-radius: 20px;
+            border-radius: 15px;
         }
         
         /* Happy Birthday Overlay */
@@ -203,7 +219,7 @@
             justify-content: center;
             opacity: 0;
             transition: all 0.4s ease;
-            border-radius: 20px;
+            border-radius: 15px;
             backdrop-filter: blur(5px);
         }
         
@@ -213,12 +229,13 @@
         
         .birthday-text {
             font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
             color: white;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             animation: birthday-pulse 1.5s ease-in-out infinite;
             padding: 1rem;
+            line-height: 1.2;
         }
         
         @keyframes birthday-pulse {
@@ -234,7 +251,7 @@
         
         .gallery-item.clicked .birthday-text {
             animation: birthday-celebration 2s ease-out;
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 5vw, 2rem);
         }
         
         @keyframes birthday-celebration {
@@ -247,7 +264,7 @@
         .birthday-heart {
             position: absolute;
             color: white;
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
             pointer-events: none;
             animation: heart-float 2s ease-out forwards;
         }
@@ -267,15 +284,15 @@
         .quotes-container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
         }
         
         .quote-card {
             background: rgba(255, 255, 255, 0.9);
-            padding: 3rem;
-            margin: 2rem 0;
-            border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(233, 30, 99, 0.15);
+            padding: 2rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(233, 30, 99, 0.15);
             position: relative;
             animation: slideInUp 1s ease;
         }
@@ -288,26 +305,28 @@
         .quote-card::before {
             content: '💖';
             position: absolute;
-            top: -15px;
-            left: 30px;
-            font-size: 2rem;
+            top: -12px;
+            left: 25px;
+            font-size: 1.5rem;
             background: white;
-            padding: 0.5rem;
+            padding: 0.4rem;
             border-radius: 50%;
         }
         
         .quote-text {
             font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
             color: var(--pink-deep);
             font-style: italic;
             margin-bottom: 1rem;
+            line-height: 1.3;
         }
         
         .quote-author {
             text-align: right;
             color: var(--pink-medium);
             font-weight: 500;
+            font-size: clamp(0.9rem, 3vw, 1rem);
         }
         
         /* About Page */
@@ -315,15 +334,15 @@
             max-width: 800px;
             margin: 0 auto;
             text-align: center;
-            padding: 2rem;
+            padding: 1rem;
         }
         
         .about-card {
             background: rgba(255, 255, 255, 0.95);
-            padding: 4rem;
-            border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(233, 30, 99, 0.2);
-            margin: 2rem 0;
+            padding: 2.5rem 2rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(233, 30, 99, 0.2);
+            margin: 1.5rem 0;
         }
         
         .sparkle {
@@ -331,22 +350,29 @@
             animation: sparkle 2s infinite;
         }
         
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(180deg); }
+        }
+        
         /* Birthday Countdown Styles */
         .countdown-section {
-            margin: 3rem 0;
-            padding: 2rem;
+            margin: 2rem auto;
+            padding: 1.5rem;
             background: rgba(255, 255, 255, 0.9);
-            border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(233, 30, 99, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(233, 30, 99, 0.2);
             backdrop-filter: blur(10px);
+            max-width: 500px;
         }
         
         .countdown-title {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 6vw, 2.5rem);
             color: var(--pink-deep);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             animation: glow 2s ease-in-out infinite alternate;
+            line-height: 1.2;
         }
         
         @keyframes glow {
@@ -355,19 +381,18 @@
         }
         
         .countdown-timer {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.8rem;
+            margin: 1.5rem 0;
         }
         
         .time-unit {
             text-align: center;
             background: var(--pink-gradient);
-            padding: 1.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(233, 30, 99, 0.3);
-            min-width: 80px;
+            padding: 1rem 0.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.3);
             animation: pulse-gentle 3s ease-in-out infinite;
         }
         
@@ -378,27 +403,29 @@
         
         .time-number {
             display: block;
-            font-size: 2.5rem;
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
             font-weight: 700;
             color: white;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1;
         }
         
         .time-label {
             display: block;
-            font-size: 0.9rem;
+            font-size: clamp(0.7rem, 2.5vw, 0.9rem);
             color: white;
             font-weight: 500;
-            margin-top: 0.5rem;
+            margin-top: 0.3rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         
         .countdown-message {
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 3.5vw, 1.3rem);
             color: var(--pink-medium);
             font-weight: 500;
             animation: bounce-gentle 2s ease-in-out infinite;
+            line-height: 1.4;
         }
         
         @keyframes bounce-gentle {
@@ -408,14 +435,15 @@
         
         /* Birthday Celebration Styles */
         .birthday-celebration {
-            margin: 3rem 0;
-            padding: 3rem;
+            margin: 2rem auto;
+            padding: 2.5rem 2rem;
             background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffa8a8, #ffcccc);
-            border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(255, 107, 107, 0.4);
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
             animation: celebration-entrance 1s ease-out;
             position: relative;
             overflow: hidden;
+            max-width: 600px;
         }
         
         @keyframes celebration-entrance {
@@ -450,13 +478,14 @@
         
         .birthday-title {
             font-family: 'Dancing Script', cursive;
-            font-size: 3.5rem;
+            font-size: clamp(2.2rem, 7vw, 3.5rem);
             color: white;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             margin-bottom: 1rem;
             animation: birthday-bounce 1s ease-in-out infinite;
             position: relative;
             z-index: 2;
+            line-height: 1.2;
         }
         
         @keyframes birthday-bounce {
@@ -466,16 +495,17 @@
         }
         
         .birthday-message {
-            font-size: 1.5rem;
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
             color: white;
             font-weight: 500;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             position: relative;
             z-index: 2;
+            line-height: 1.4;
         }
         
         .birthday-emojis {
-            font-size: 3rem;
+            font-size: clamp(2rem, 6vw, 3rem);
             animation: emoji-dance 2s ease-in-out infinite;
             position: relative;
             z-index: 2;
@@ -501,8 +531,8 @@
         
         .confetti-piece {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background: #ff6b6b;
             animation: confetti-fall 3s linear infinite;
         }
@@ -521,56 +551,146 @@
         /* Page titles */
         .page-title {
             font-family: 'Dancing Script', cursive;
-            font-size: 3rem;
+            font-size: clamp(2.2rem, 7vw, 3rem);
             color: var(--pink-deep);
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             position: relative;
+            line-height: 1.2;
         }
         
         .page-title::after {
             content: '';
             display: block;
-            width: 100px;
+            width: 80px;
             height: 3px;
             background: var(--pink-gradient);
             margin: 1rem auto;
             border-radius: 2px;
         }
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .celebration-text { font-size: 1.2rem; }
-            .gallery-grid { grid-template-columns: 1fr; }
-            nav ul { flex-direction: column; gap: 1rem; }
-            nav { padding: 1rem; }
-            .page { padding: 150px 1rem 2rem; }
+        /* Mobile Specific Optimizations */
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.6rem 0.8rem;
+            }
             
-            .countdown-timer {
-                flex-wrap: wrap;
+            nav ul {
+                gap: 0.3rem;
+            }
+            
+            nav a {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.8rem;
+            }
+            
+            .page {
+                padding: 70px 0.8rem 1.5rem;
+            }
+            
+            .hero {
+                padding: 1.5rem 0;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
                 gap: 1rem;
             }
             
-            .time-unit {
-                min-width: 60px;
-                padding: 1rem;
+            .quote-card {
+                padding: 1.5rem 1rem;
+                margin: 1rem 0;
             }
             
-            .time-number {
-                font-size: 2rem;
+            .about-card {
+                padding: 2rem 1.5rem;
             }
             
-            .countdown-title {
-                font-size: 2rem;
+            .countdown-section {
+                padding: 1.2rem;
+                margin: 1.5rem auto;
             }
             
-            .birthday-title {
-                font-size: 2.5rem;
+            .birthday-celebration {
+                padding: 2rem 1.5rem;
+                margin: 1.5rem auto;
+            }
+        }
+        
+        /* Tablet Optimization */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            nav {
+                padding: 1rem 2rem;
             }
             
-            .birthday-message {
-                font-size: 1.2rem;
+            nav ul {
+                justify-content: center;
+                gap: 1.5rem;
+            }
+            
+            .page {
+                padding: 90px 2rem 2rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 1.8rem;
+            }
+        }
+        
+        /* Desktop Optimization */
+        @media (min-width: 1025px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+            
+            nav ul {
+                justify-content: center;
+                gap: 2rem;
+            }
+            
+            nav a {
+                padding: 0.5rem 1rem;
+                font-size: 1rem;
+            }
+            
+            .page {
+                padding: 100px 2rem 2rem;
+            }
+            
+            .hero {
+                padding: 4rem 0;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+            
+            .quote-card {
+                padding: 3rem;
+            }
+            
+            .about-card {
+                padding: 4rem;
+            }
+        }
+        
+        /* Smooth scrolling for better UX */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Touch improvements for mobile */
+        @media (hover: none) and (pointer: coarse) {
+            .gallery-item:active .birthday-overlay {
+                opacity: 1;
+            }
+            
+            nav a:active {
+                background: var(--pink-gradient);
+                color: white;
+                transform: scale(0.95);
             }
         }
     </style>
@@ -631,7 +751,7 @@
             <div class="celebration-emojis">
                 🎉 🌸 🎊 🌟 💖
             </div>
-            <p style="font-size: 1.2rem; color: var(--pink-deep); margin-top: 2rem;">
+            <p style="font-size: clamp(1rem, 3vw, 1.2rem); color: var(--pink-deep); margin-top: 2rem; line-height: 1.5;">
                 Welcome to a beautiful tribute created with love<br>
                 <strong>From your loving sister, Elizabeth 💕</strong>
             </p>
@@ -807,21 +927,21 @@
         <h2 class="page-title">About This Beautiful Sister 💖</h2>
         <div class="about-content">
             <div class="about-card">
-                <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: var(--pink-deep); margin-bottom: 2rem;">
+                <h3 style="font-family: 'Dancing Script', cursive; font-size: clamp(2rem, 6vw, 2.5rem); color: var(--pink-deep); margin-bottom: 2rem; line-height: 1.2;">
                     <span class="sparkle">✨</span> Darasimi <span class="sparkle">✨</span>
                 </h3>
-                <p style="font-size: 1.3rem; color: var(--pink-medium); line-height: 1.8; margin-bottom: 2rem;">
+                <p style="font-size: clamp(1.1rem, 3.5vw, 1.3rem); color: var(--pink-medium); line-height: 1.8; margin-bottom: 2rem;">
                     This beautiful website is a celebration of an amazing sister, created with so much love and care. 
                     Darasimi brings joy, laughter, and endless beautiful moments to everyone around her.
                 </p>
-                <p style="font-size: 1.1rem; color: var(--pink-deep); margin-bottom: 2rem;">
+                <p style="font-size: clamp(1rem, 3vw, 1.1rem); color: var(--pink-deep); margin-bottom: 2rem; line-height: 1.6;">
                     Every photo, every memory, and every moment shared here tells the story of a wonderful person 
                     who deserves to be celebrated every single day! 🌟
                 </p>
-                <div style="font-size: 2rem; margin: 2rem 0;">
+                <div style="font-size: clamp(1.5rem, 5vw, 2rem); margin: 2rem 0;">
                     💕 🎊 🌸 🎉 💖 🌟 ✨ 🎈
                 </div>
-                <p style="font-style: italic; color: var(--pink-medium);">
+                <p style="font-style: italic; color: var(--pink-medium); font-size: clamp(0.9rem, 2.5vw, 1rem);">
                     "Made with infinite love by your sister Elizabeth 💕"
                 </p>
             </div>
@@ -1003,6 +1123,38 @@
                 setTimeout(createHeart, i * 1000);
             }
         });
+        
+        // Performance optimization: Reduce hearts on mobile
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+        
+        // Create hearts less frequently on mobile
+        setInterval(() => {
+            if (Math.random() < (isMobile() ? 0.3 : 0.6)) {
+                createHeart();
+            }
+        }, 2000);
+        
+        // Handle orientation changes on mobile
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                // Force a repaint after orientation change
+                document.body.style.display = 'none';
+                document.body.offsetHeight;
+                document.body.style.display = 'block';
+            }, 100);
+        });
+        
+        // Smooth scrolling polyfill for older browsers
+        if (!('scrollBehavior' in document.documentElement.style)) {
+            const smoothscroll = document.createElement('script');
+            smoothscroll.src = 'https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js';
+            document.head.appendChild(smoothscroll);
+        }
+        
+        // Add touch feedback for better mobile experience
+        document.addEventListener('touchstart', function(){}, {passive: true});
     </script>
 </body>
 </html>
