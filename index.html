@@ -57,7 +57,8 @@
       }
 
       @keyframes music-pulse {
-        0%, 100% {
+        0%,
+        100% {
           transform: scale(1);
           box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
         }
@@ -92,14 +93,30 @@
         animation: music-bar 1s ease-in-out infinite;
       }
 
-      .music-bar:nth-child(1) { height: 60%; animation-delay: 0s; }
-      .music-bar:nth-child(2) { height: 100%; animation-delay: 0.1s; }
-      .music-bar:nth-child(3) { height: 80%; animation-delay: 0.2s; }
-      .music-bar:nth-child(4) { height: 40%; animation-delay: 0.3s; }
-      .music-bar:nth-child(5) { height: 70%; animation-delay: 0.4s; }
+      .music-bar:nth-child(1) {
+        height: 60%;
+        animation-delay: 0s;
+      }
+      .music-bar:nth-child(2) {
+        height: 100%;
+        animation-delay: 0.1s;
+      }
+      .music-bar:nth-child(3) {
+        height: 80%;
+        animation-delay: 0.2s;
+      }
+      .music-bar:nth-child(4) {
+        height: 40%;
+        animation-delay: 0.3s;
+      }
+      .music-bar:nth-child(5) {
+        height: 70%;
+        animation-delay: 0.4s;
+      }
 
       @keyframes music-bar {
-        0%, 100% {
+        0%,
+        100% {
           transform: scaleY(0.3);
         }
         50% {
@@ -897,8 +914,8 @@
   <body>
     <!-- Background Music -->
     <audio id="backgroundMusic" loop preload="auto">
-      <source src="audio/happy-birthday-simi.mp3" type="audio/mpeg">
-      <source src="audio/happy-birthday-simi.ogg" type="audio/ogg">
+      <source src="audio/happy-birthday-simi.mp3" type="audio/mpeg" />
+      <source src="audio/happy-birthday-simi.ogg" type="audio/ogg" />
       Your browser does not support the audio element.
     </audio>
 
@@ -1149,8 +1166,8 @@
 
         <div class="quote-card">
           <div class="quote-text">
-            "A sister is both your mirror and your opposite - and Esther is
-            the perfect reflection of beauty and grace" ✨
+            "A sister is both your mirror and your opposite - and Esther is the
+            perfect reflection of beauty and grace" ✨
           </div>
           <div class="quote-author">- Elizabeth</div>
         </div>
@@ -1190,9 +1207,11 @@
               margin-bottom: 2rem;
             "
           >
-            This beautiful website is a celebration of an amazing sister,
-            created with so much love and care. Esther brings joy, laughter,
-            and endless beautiful moments to everyone around her.
+            This beautiful website is a celebration of how amazing you are,
+            created with so much love and care. You bring joy, laughter and
+            endless beautiful moments to everyone around you! I'm really
+            grateful to have you as a sister even though you can be annoying
+            sometimes 🌝
           </p>
           <p
             style="
@@ -1225,28 +1244,30 @@
     <script>
       // Music functionality
       let isPlaying = false;
-      const music = document.getElementById('backgroundMusic');
-      const musicControl = document.getElementById('musicControl');
+      const music = document.getElementById("backgroundMusic");
+      const musicControl = document.getElementById("musicControl");
 
       // Initialize music
       function initializeMusic() {
         // Try to start music automatically (modern browsers may block this)
         music.volume = 0.5; // Set volume to 50%
-        
+
         // Attempt autoplay
         const playPromise = music.play();
-        
+
         if (playPromise !== undefined) {
-          playPromise.then(() => {
-            // Autoplay successful
-            isPlaying = true;
-            updateMusicButton();
-          }).catch(error => {
-            // Autoplay prevented by browser
-            console.log("Autoplay prevented, user interaction required");
-            isPlaying = false;
-            updateMusicButton();
-          });
+          playPromise
+            .then(() => {
+              // Autoplay successful
+              isPlaying = true;
+              updateMusicButton();
+            })
+            .catch((error) => {
+              // Autoplay prevented by browser
+              console.log("Autoplay prevented, user interaction required");
+              isPlaying = false;
+              updateMusicButton();
+            });
         }
       }
 
@@ -1257,11 +1278,13 @@
         } else {
           const playPromise = music.play();
           if (playPromise !== undefined) {
-            playPromise.then(() => {
-              isPlaying = true;
-            }).catch(error => {
-              console.log("Error playing music:", error);
-            });
+            playPromise
+              .then(() => {
+                isPlaying = true;
+              })
+              .catch((error) => {
+                console.log("Error playing music:", error);
+              });
           }
         }
         updateMusicButton();
@@ -1269,10 +1292,10 @@
 
       function updateMusicButton() {
         if (isPlaying) {
-          musicControl.classList.remove('paused');
+          musicControl.classList.remove("paused");
           musicControl.title = "Pause Music 🎵";
         } else {
-          musicControl.classList.add('paused');
+          musicControl.classList.add("paused");
           musicControl.title = "Play Music 🎵";
         }
       }
@@ -1464,10 +1487,10 @@
       }
 
       // Initialize everything when page loads
-      window.addEventListener('load', () => {
+      window.addEventListener("load", () => {
         // Initialize music
         initializeMusic();
-        
+
         // Create initial hearts
         for (let i = 0; i < 5; i++) {
           setTimeout(createHeart, i * 1000);
@@ -1475,20 +1498,26 @@
       });
 
       // Allow user to start music on first interaction
-      document.addEventListener('click', () => {
-        if (!isPlaying && music.paused) {
-          // This will help with browsers that require user interaction
-          const playPromise = music.play();
-          if (playPromise !== undefined) {
-            playPromise.then(() => {
-              isPlaying = true;
-              updateMusicButton();
-            }).catch(error => {
-              // Still blocked or error occurred
-            });
+      document.addEventListener(
+        "click",
+        () => {
+          if (!isPlaying && music.paused) {
+            // This will help with browsers that require user interaction
+            const playPromise = music.play();
+            if (playPromise !== undefined) {
+              playPromise
+                .then(() => {
+                  isPlaying = true;
+                  updateMusicButton();
+                })
+                .catch((error) => {
+                  // Still blocked or error occurred
+                });
+            }
           }
-        }
-      }, { once: true });
+        },
+        { once: true }
+      );
 
       // Update countdown every second
       setInterval(updateCountdown, 1000);
